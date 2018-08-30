@@ -74,7 +74,7 @@ namespace Microsoft.ML.Runtime.FastTree
         /// </summary>
         void InitTreeLearner(Dataset trainData, int maxNumLeaves, int maxCatSplitPoints, ref int minDocInLeaf);
 
-        RegressionTree LearnTree(IChannel ch, Func<IChannel, bool[], double[], int, RegressionTree> treeLearner, bool[] activeFeatures, double[] targets);
+        RegressionTree LearnTree(IChannel ch, bool[] activeFeatures, Func<IChannel, bool[], double[], RegressionTree> fitTargets, Func<IChannel, double[]> computeTargets, Action<int> setSeed);
 
         /// <summary>
         /// Finalize while tree learner is freed.
@@ -161,12 +161,6 @@ namespace Microsoft.ML.Runtime.FastTree
         /// then perform a global sync up.
         /// </summary>
         void SyncGlobalBoundary(int numFeatures, int maxBin, Double[][] binUpperBounds);
-
-        /// <summary>
-        /// Synchonize the tree ensemble across parallel workers
-        /// </summary>
-        /// <returns>The number of trees added to the ensemble</returns>
-        int SynchronizeEnsemble();
     }
 
     [TlcModule.ComponentKind("ParallelTraining")]

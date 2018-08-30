@@ -611,31 +611,6 @@ namespace Microsoft.ML.Runtime.FastTree
                 {
                     using (Timer.Time(TimerEvent.Iteration))
                     {
-                        int treesAdded = ParallelTraining.SynchronizeEnsemble();
-                        if (treesAdded > 0)
-                        {
-                            // Update the trees
-                            OptimizationAlgorithm.UpdateAllScoresInEnsemble(ch, Ensemble.NumTrees - treesAdded);
-
-                            // Revert randomized start, if appropriate
-                            if (revertRandomStart)
-                            {
-                                revertRandomStart = false;
-                                ch.Info("Reverting random score assignment");
-                                OptimizationAlgorithm.TrainingScores.RandomizeScores(Args.RngSeed, true);
-                            }
-
-                            // Re-check looping condition
-                            if (Ensemble.NumTrees >= numTotalTrees)
-                            {
-                                break;
-                            }
-
-                            // Check for early stopping
-                            if (ShouldStop(ch, ref earlyStoppingRule, ref bestIteration))
-                                break;
-                        }
-
                         // Reset Seeds
                         _featureSelectionRandom = new Random(Args.FeatureSelectSeed + Ensemble.NumTrees);
 

@@ -8,8 +8,8 @@ namespace Microsoft.ML.Runtime.FastTree.Internal
     public class AcceleratedGradientDescent : GradientDescent
     {
         public AcceleratedGradientDescent(Ensemble ensemble, Dataset trainData, double[] initTrainScores, IGradientAdjuster gradientWrapper,
-            double dropoutRate = 0, int dropoutSeed = int.MinValue)
-            : base(ensemble, trainData, initTrainScores, gradientWrapper, dropoutRate, dropoutSeed)
+            IParallelTraining parallelTraining, double dropoutRate = 0, int dropoutSeed = int.MinValue)
+            : base(ensemble, trainData, initTrainScores, gradientWrapper, parallelTraining, dropoutRate, dropoutSeed)
         {
             UseFastTrainingScoresUpdate = false;
         }

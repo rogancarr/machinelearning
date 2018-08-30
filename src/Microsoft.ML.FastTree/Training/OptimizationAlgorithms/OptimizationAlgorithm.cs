@@ -37,8 +37,10 @@ namespace Microsoft.ML.Runtime.FastTree.Internal
         private int _dropoutSeed;
         public bool UseFastTrainingScoresUpdate;
 
+        protected readonly IParallelTraining ParallelTraining;
+
         public OptimizationAlgorithm(Ensemble ensemble, Dataset trainData, double[] initTrainScores,
-            double dropoutRate = 0, int dropoutSeed = int.MinValue)
+            IParallelTraining parallelTraining, double dropoutRate = 0, int dropoutSeed = int.MinValue)
         {
             Ensemble = ensemble;
             TrainingScores = ConstructScoreTracker("train", trainData, initTrainScores);
@@ -49,6 +51,7 @@ namespace Microsoft.ML.Runtime.FastTree.Internal
             _dropoutSeed = dropoutSeed;
             DropoutRate = dropoutRate;
             UseFastTrainingScoresUpdate = true;
+            ParallelTraining = parallelTraining;
         }
 
         public void SetTrainingData(Dataset trainData, double[] initTrainScores)

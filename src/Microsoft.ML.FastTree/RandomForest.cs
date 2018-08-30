@@ -24,7 +24,7 @@ namespace Microsoft.ML.Runtime.FastTree
         {
             Host.CheckValue(ch, nameof(ch));
             IGradientAdjuster gradientWrapper = MakeGradientWrapper(ch);
-            var optimizationAlgorithm = new RandomForestOptimizer(Ensemble, TrainSet, InitTrainScores, gradientWrapper);
+            var optimizationAlgorithm = new RandomForestOptimizer(Ensemble, TrainSet, InitTrainScores, gradientWrapper, ParallelTraining);
 
             optimizationAlgorithm.TreeLearner = ConstructTreeLearner(ch);
             optimizationAlgorithm.ObjectiveFunction = ConstructObjFunc(ch);

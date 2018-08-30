@@ -64,11 +64,6 @@ namespace Microsoft.ML.Runtime.FastTree
             return;
         }
 
-        public int SynchronizeEnsemble()
-        {
-            return 0;
-        }
-
         public void InitIteration(ref bool[] activeFeatures)
         {
             return;
@@ -94,9 +89,11 @@ namespace Microsoft.ML.Runtime.FastTree
             return false;
         }
 
-        public RegressionTree LearnTree(IChannel ch, Func<IChannel, bool[], double[], int, RegressionTree> learnTree, bool[] activeFeatures, double[] targets)
+        public RegressionTree LearnTree(IChannel ch, bool[] activeFeatures, Func<IChannel, bool[], double[], RegressionTree> fitTargets,
+            Func<IChannel, double[]> computeTargets, Action<int> setSeed)
         {
-            return learnTree(ch, activeFeatures, targets, 123);
+            setSeed(123); //123 is the hardcoded default for FastTree
+            return fitTargets(ch, activeFeatures, computeTargets(ch));
         }
 
         public void SyncGlobalBoundary(int numFeatures, int maxBin, Double[][] binUpperBounds)

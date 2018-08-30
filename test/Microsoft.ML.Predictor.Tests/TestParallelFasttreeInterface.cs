@@ -136,17 +136,20 @@ namespace Microsoft.ML.Runtime.RunTests
             return;
         }
 
-        public RegressionTree LearnTree(IChannel ch, Func<IChannel, bool[], double[], int, RegressionTree> learnTree, bool[] activeFeatures, double[] targets)
+        public RegressionTree LearnTree(IChannel ch, bool[] activeFeatures, Func<IChannel, bool[], double[], RegressionTree> fitTargets,
+            Func<IChannel, double[]> computeTargets, Action<int> setSeed)
         {
-            Assert.NotNull(learnTree);
+            Assert.NotNull(fitTargets);
             Assert.NotNull(activeFeatures);
-            Assert.NotNull(targets);
+            Assert.NotNull(computeTargets);
+            Assert.NotNull(setSeed);
             Assert.True(_isInitEnv);
             Assert.True(_isInitBins);
             Assert.True(_isInitTreeLearner);
             Assert.True(_isInitTraining);
             _isLearnTree = true;
-            return learnTree(ch, activeFeatures, targets, 123);
+            setSeed(123);
+            return fitTargets(ch, activeFeatures, computeTargets(ch));
         }
 
         public bool InitializeBins(double[][] binUpperBounds)
@@ -201,12 +204,6 @@ namespace Microsoft.ML.Runtime.RunTests
             Assert.True(_isInitTreeLearner);
             Assert.True(_isInitIteration);
             return true;
-        }
-
-        public int SynchronizeEnsemble()
-        {
-            Assert.True(_isInitTraining);
-            return 0;
         }
     }
 

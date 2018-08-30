@@ -211,18 +211,15 @@ namespace Microsoft.ML.Runtime.FastTree.Internal
             PerformSplit(tree, 0, targets, out dummyLteChild, out dummyGtChild);
         }
 
-        public sealed override RegressionTree FitTargets(IChannel ch, bool[] activeFeatures, double[] targets)
-        {
-            return _parallelTraining.LearnTree(ch, LearnTree, activeFeatures, targets);
-        }
-
         /// <summary>
-        /// Learns a new tree for the current outputs
+        /// Fits a new tree to the current targets
         /// </summary>
+        /// <param name="ch">A channel to write to</param>
+        /// <param name="activeFeatures">The features to use in the fit</param>
+        /// <param name="targets">The value of the targets to fit</param>
         /// <returns>A regression tree</returns>
-        private RegressionTree LearnTree(IChannel ch, bool[] activeFeatures, double[] targets, int randomSeed)
+        public override RegressionTree FitTargets(IChannel ch, bool[] activeFeatures, double[] targets)
         {
-            ResetRandomState(randomSeed);
             int maxLeaves = base.NumLeaves;
             using (Timer.Time(TimerEvent.TreeLearnerGetTree))
             {

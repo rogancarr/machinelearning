@@ -22,8 +22,8 @@ namespace Microsoft.ML.Runtime.FastTree.Internal
         private double[] _scores;
 
         public GradientDescent(Ensemble ensemble, Dataset trainData, double[] initTrainScores, IGradientAdjuster gradientWrapper,
-            double dropoutRate = 0, int dropoutSeed = int.MinValue)
-            : base(ensemble, trainData, initTrainScores, dropoutRate, dropoutSeed)
+            IParallelTraining parallelTraining, double dropoutRate = 0, int dropoutSeed = int.MinValue)
+            : base(ensemble, trainData, initTrainScores, parallelTraining, dropoutRate, dropoutSeed)
         {
             _gradientWrapper = gradientWrapper;
             _treeScores = new List<double[]>();
@@ -99,7 +99,7 @@ namespace Microsoft.ML.Runtime.FastTree.Internal
         {
             Contracts.CheckValue(ch, nameof(ch));
             // Fit a regression tree to the gradient using least squares.
-            RegressionTree tree = TreeLearner.FitTargets(ch, activeFeatures, AdjustTargetsAndSetWeights(ch));
+            RegressionTree tree = ParallelTraining.LearnTree(ch, activeFeatures, TreeLearner.FitTargets, AdjustTargetsAndSetWeights, TreeLearner.ResetRandomState);
             if (tree == null)
                 return null; // Could not learn a tree. Exit.
 

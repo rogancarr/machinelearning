@@ -391,9 +391,11 @@ namespace Microsoft.ML.Runtime.RunTests
             return;
         }
 
-        public RegressionTree LearnTree(IChannel ch, Func<IChannel, bool[], double[], int, RegressionTree> learnTree, bool[] activeFeatures, double[] targets)
+        public RegressionTree LearnTree(IChannel ch, bool[] activeFeatures, Func<IChannel, bool[], double[], RegressionTree> fitTargets, 
+            Func<IChannel, double[]> computeTargets, Action<int> setSeed)
         {
-            return learnTree(ch, activeFeatures, targets, 123);
+            setSeed(123);
+            return fitTargets(ch, activeFeatures, computeTargets(ch));
         }
 
         public void SyncGlobalBoundary(int numFeatures, int maxBin, Double[][] binUpperBounds)
@@ -422,11 +424,6 @@ namespace Microsoft.ML.Runtime.RunTests
         public bool IsSkipNonSplittableHistogram()
         {
             return true;
-        }
-
-        public int SynchronizeEnsemble()
-        {
-            return 0;
         }
     }
 }

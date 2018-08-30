@@ -69,15 +69,15 @@ namespace Microsoft.ML.Runtime.FastTree
             {
                 case BoostedTreeArgs.OptimizationAlgorithmType.GradientDescent:
                     optimizationAlgorithm = new GradientDescent(Ensemble, TrainSet, InitTrainScores, gradientWrapper,
-                        dropoutRate: Args.DropoutRate, dropoutSeed: Args.RngSeed);
+                        ParallelTraining, dropoutRate: Args.DropoutRate, dropoutSeed: Args.RngSeed);
                     break;
                 case BoostedTreeArgs.OptimizationAlgorithmType.AcceleratedGradientDescent:
                     optimizationAlgorithm = new AcceleratedGradientDescent(Ensemble, TrainSet, InitTrainScores, gradientWrapper,
-                        dropoutRate: Args.DropoutRate, dropoutSeed: Args.RngSeed);
+                        ParallelTraining, dropoutRate: Args.DropoutRate, dropoutSeed: Args.RngSeed);
                     break;
                 case BoostedTreeArgs.OptimizationAlgorithmType.ConjugateGradientDescent:
                     optimizationAlgorithm = new ConjugateGradientDescent(Ensemble, TrainSet, InitTrainScores, gradientWrapper,
-                        dropoutRate: Args.DropoutRate, dropoutSeed: Args.RngSeed);
+                        ParallelTraining, dropoutRate: Args.DropoutRate, dropoutSeed: Args.RngSeed);
                     break;
                 default:
                     throw ch.Except("Unknown optimization algorithm '{0}'", Args.OptimizationAlgorithm);
