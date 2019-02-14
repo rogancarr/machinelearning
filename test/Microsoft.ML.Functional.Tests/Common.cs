@@ -94,6 +94,21 @@ namespace Microsoft.ML.Functional.Tests
         }
 
         /// <summary>
+        /// Assert that two float arrays are not null and the same length but not equal.
+        /// </summary>
+        /// <param name="array1">An array of floats.</param>
+        /// <param name="array2">An array of floats.</param>
+        public static void AssertNotEqual(float[] array1, float[] array2)
+        {
+            Assert.NotNull(array1);
+            Assert.NotNull(array2);
+            Assert.Equal(array1.Length, array2.Length);
+
+            for (int i = 0; i < array1.Length; i++)
+                Assert.NotEqual(array1[i], array2[i]);
+        }
+
+        /// <summary>
         ///  Assert that two <see cref="Schema"/> objects are equal.
         /// </summary>
         /// <param name="schema1">A <see cref="Schema"/> object.</param>
