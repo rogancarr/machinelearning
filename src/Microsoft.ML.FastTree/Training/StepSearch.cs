@@ -30,7 +30,7 @@ namespace Microsoft.ML.Trainers.FastTree
             _historicStepSize = Math.Max(1.0, _minStepSize);
         }
 
-        private static readonly double _phi = (1.0 + Math.Sqrt(5)) / 2;
+        private static double _phi = (1.0 + Math.Sqrt(5)) / 2;
 
         private static void Swap<T>(ref T a, ref T b)
         {
@@ -49,8 +49,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class StepScoresAndLoss
         {
-            private readonly Test _lossCalculator;
-            private readonly int _lossIndex;
+            private Test _lossCalculator;
+            private int _lossIndex;
 
             public StepScoresAndLoss(Test lossCalculator, int lossIndex)
             {

@@ -65,15 +65,15 @@ namespace Microsoft.ML.Trainers.FastTree
             public int? Parallel;
         }
 
-        private readonly IHost _host;
+        private IHost _host;
 
-        private readonly IntArrayType _type;
-        private readonly int _len;
-        private readonly int _count;
-        private readonly int _bins;
-        private readonly int _parallel;
-        private readonly double _param;
-        private readonly double _seconds;
+        private IntArrayType _type;
+        private int _len;
+        private int _count;
+        private int _bins;
+        private int _parallel;
+        private double _param;
+        private double _seconds;
 
         public SumupPerformanceCommand(IHostEnvironment env, Arguments args)
         {

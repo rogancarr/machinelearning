@@ -19,32 +19,32 @@ namespace Microsoft.ML.FastTree
         /// <see cref="RegressionTreeBase"/> is an immutable wrapper over <see cref="_tree"/> for exposing some tree's
         /// attribute to users.
         /// </summary>
-        private readonly InternalRegressionTree _tree;
+        private InternalRegressionTree _tree;
 
         /// <summary>
         /// See <see cref="LteChild"/>.
         /// </summary>
-        private readonly ImmutableArray<int> _lteChild;
+        private ImmutableArray<int> _lteChild;
         /// <summary>
         /// See <see cref="GtChild"/>.
         /// </summary>
-        private readonly ImmutableArray<int> _gtChild;
+        private ImmutableArray<int> _gtChild;
         /// <summary>
         /// See <see cref="NumericalSplitFeatureIndexes"/>.
         /// </summary>
-        private readonly ImmutableArray<int> _numericalSplitFeatureIndexes;
+        private ImmutableArray<int> _numericalSplitFeatureIndexes;
         /// <summary>
         /// See <see cref="NumericalSplitThresholds"/>.
         /// </summary>
-        private readonly ImmutableArray<float> _numericalSplitThresholds;
+        private ImmutableArray<float> _numericalSplitThresholds;
         /// <summary>
         /// See <see cref="CategoricalSplitFlags"/>.
         /// </summary>
-        private readonly ImmutableArray<bool> _categoricalSplitFlags;
+        private ImmutableArray<bool> _categoricalSplitFlags;
         /// <summary>
         /// See <see cref="LeafValues"/>.
         /// </summary>
-        private readonly ImmutableArray<double> _leafValues;
+        private ImmutableArray<double> _leafValues;
 
         /// <summary>
         /// <see cref="LteChild"/>[i] is the i-th node's child index used when
@@ -184,14 +184,14 @@ namespace Microsoft.ML.FastTree
         /// Sample labels from training data. <see cref="_leafSamples"/>[i] stores the labels falling into the
         /// i-th leaf.
         /// </summary>
-        private readonly double[][] _leafSamples;
+        private double[][] _leafSamples;
 
         /// <summary>
         /// Sample labels' weights from training data. <see cref="_leafSampleWeights"/>[i] stores the weights for
         /// labels falling into the i-th leaf. <see cref="_leafSampleWeights"/>[i][j] is the weight of
         /// <see cref="_leafSamples"/>[i][j].
         /// </summary>
-        private readonly double[][] _leafSampleWeights;
+        private double[][] _leafSampleWeights;
 
         /// <summary>
         /// Return the training labels falling into the specified leaf.

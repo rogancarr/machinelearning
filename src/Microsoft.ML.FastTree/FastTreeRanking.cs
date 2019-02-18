@@ -473,7 +473,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         internal sealed class LambdaRankObjectiveFunction : ObjectiveFunctionBase, IStepSearch
         {
-            private readonly short[] _labels;
+            private short[] _labels;
 
             private enum DupeIdInfo
             {
@@ -484,9 +484,9 @@ namespace Microsoft.ML.Trainers.FastTree
             };
 
             // precomputed arrays
-            private readonly double[] _inverseMaxDcgt;
-            private readonly double[] _discount;
-            private readonly int[] _oneTwoThree;
+            private double[] _inverseMaxDcgt;
+            private double[] _discount;
+            private int[] _oneTwoThree;
 
             private int[][] _labelCounts;
 

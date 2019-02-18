@@ -23,11 +23,11 @@ namespace Microsoft.ML.Trainers.FastTree
 
         protected double MaxTreeOutput;
         // random number generator
-        private readonly Random _rnd;
+        private Random _rnd;
 
         protected const int QueryThreadChunkSize = 100;
 
-        public readonly Dataset Dataset;
+        public Dataset Dataset;
 
         public double[] Weights { get; protected set; }
 

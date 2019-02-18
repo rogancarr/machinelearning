@@ -10,8 +10,8 @@ namespace Microsoft.ML
 {
     public sealed class QuantileStatistics : IQuantileDistribution<float>
     {
-        private readonly float[] _data;
-        private readonly float[] _weights;
+        private float[] _data;
+        private float[] _weights;
 
         //This holds the cumulative sum of _weights to search the rank easily by binary search.
         private float[] _weightedSums;

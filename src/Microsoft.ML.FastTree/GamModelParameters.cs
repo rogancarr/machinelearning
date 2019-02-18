@@ -31,26 +31,26 @@ namespace Microsoft.ML.Trainers.FastTree
     public abstract class GamModelParametersBase : ModelParametersBase<float>, IValueMapper, ICalculateFeatureContribution,
         IFeatureContributionMapper, ICanSaveInTextFormat, ICanSaveSummary, ICanSaveInIniFormat
     {
-        private readonly double[][] _binUpperBounds;
-        private readonly double[][] _binEffects;
+        private double[][] _binUpperBounds;
+        private double[][] _binEffects;
         /// <summary>
         /// The model intercept. Also known as bias or mean effect.
         /// </summary>
-        public readonly double Intercept;
+        public double Intercept;
         /// <summary>
         /// The number of shape functions used in the model.
         /// </summary>
-        public readonly int NumShapeFunctions;
-        private readonly VectorType _inputType;
-        private readonly DataViewType _outputType;
+        public int NumShapeFunctions;
+        private VectorType _inputType;
+        private DataViewType _outputType;
         // These would be the bins for a totally sparse input.
-        private readonly int[] _binsAtAllZero;
+        private int[] _binsAtAllZero;
         // The output value for all zeros
-        private readonly double _valueAtAllZero;
+        private double _valueAtAllZero;
 
-        private readonly int[] _shapeToInputMap;
-        private readonly int _numInputFeatures;
-        private readonly Dictionary<int, int> _inputFeatureToShapeFunctionMap;
+        private int[] _shapeToInputMap;
+        private int _numInputFeatures;
+        private Dictionary<int, int> _inputFeatureToShapeFunctionMap;
 
         DataViewType IValueMapper.InputType => _inputType;
         DataViewType IValueMapper.OutputType => _outputType;
@@ -566,8 +566,8 @@ namespace Microsoft.ML.Trainers.FastTree
                 }
             }
 
-            private readonly string _inputModelPath;
-            private readonly bool _open;
+            private string _inputModelPath;
+            private bool _open;
 
             public VisualizationCommand(IHostEnvironment env, Arguments args)
                 : base(env, args.SetServerIfNeeded(env), LoadName)
@@ -590,16 +590,16 @@ namespace Microsoft.ML.Trainers.FastTree
 
             private sealed class Context
             {
-                private readonly GamModelParametersBase _pred;
-                private readonly RoleMappedData _data;
+                private GamModelParametersBase _pred;
+                private RoleMappedData _data;
 
-                private readonly VBuffer<ReadOnlyMemory<char>> _featNames;
+                private VBuffer<ReadOnlyMemory<char>> _featNames;
                 // The scores.
-                private readonly float[] _scores;
+                private float[] _scores;
                 // The labels.
-                private readonly float[] _labels;
+                private float[] _labels;
                 // For every feature, and for every bin, there is a list of documents with that feature.
-                private readonly List<int>[][] _binDocsList;
+                private List<int>[][] _binDocsList;
                 // Whenever the predictor is "modified," we up this version. This value is returned for anything
                 // that is subject to change, and can be used by client web code to detect whenever something
                 // may have happened behind its back.
@@ -607,12 +607,12 @@ namespace Microsoft.ML.Trainers.FastTree
                 private long _saveVersion;
 
                 // Non-null if this object was created with an evaluator *and* scores and labels is non-empty.
-                private readonly RoleMappedData _dataForEvaluator;
+                private RoleMappedData _dataForEvaluator;
                 // Non-null in the same conditions that the above is non-null.
-                private readonly IEvaluator _eval;
+                private IEvaluator _eval;
 
                 //the map of categorical indices, as defined in MetadataUtils
-                private readonly int[] _catsMap;
+                private int[] _catsMap;
 
                 /// <summary>
                 /// These are the number of input features, as opposed to the number of features used within GAM

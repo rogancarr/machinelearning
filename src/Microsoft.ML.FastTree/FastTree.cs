@@ -43,7 +43,7 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     internal static class FastTreeShared
     {
-        public static readonly object TrainLock = new object();
+        public static object TrainLock = new object();
     }
 
     public abstract class FastTreeTrainerBase<TOptions, TTransformer, TModel> :
@@ -52,8 +52,8 @@ namespace Microsoft.ML.Trainers.FastTree
         where TOptions : TreeOptions, new()
         where TModel : class
     {
-        protected readonly TOptions FastTreeTrainerOptions;
-        protected readonly bool AllowGC;
+        protected TOptions FastTreeTrainerOptions;
+        protected bool AllowGC;
         protected int FeatureCount;
         private protected InternalTreeEnsemble TrainedEnsemble;
         private protected RoleMappedData ValidData;
@@ -900,19 +900,19 @@ namespace Microsoft.ML.Trainers.FastTree
 
     internal abstract class DataConverter
     {
-        protected readonly int NumFeatures;
+        protected int NumFeatures;
         public abstract int NumExamples { get; }
 
-        protected readonly Float MaxLabel;
+        protected Float MaxLabel;
 
-        protected readonly PredictionKind PredictionKind;
+        protected PredictionKind PredictionKind;
 
         /// <summary>
         /// The per-feature bin upper bounds. Implementations may differ on when all of the items
         /// in this array are initialized to non-null values but it must happen at least no later
         /// than immediately after we return from <see cref="GetDataset"/>.
         /// </summary>
-        public readonly Double[][] BinUpperBounds;
+        public Double[][] BinUpperBounds;
 
         /// <summary>
         /// In the event that any features are filtered, this will contain the feature map, where
@@ -926,11 +926,11 @@ namespace Microsoft.ML.Trainers.FastTree
         /// <seealso cref="InternalTreeEnsemble.RemapFeatures"/>
         public int[] FeatureMap;
 
-        protected readonly IHost Host;
+        protected IHost Host;
 
-        protected readonly int[] CategoricalFeatureIndices;
+        protected int[] CategoricalFeatureIndices;
 
-        protected readonly bool CategoricalSplit;
+        protected bool CategoricalSplit;
 
         protected bool UsingMaxLabel
         {
@@ -1288,8 +1288,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class DiskImpl : DataConverter
         {
-            private readonly int _numExamples;
-            private readonly Dataset _dataset;
+            private int _numExamples;
+            private Dataset _dataset;
 
             public override int NumExamples { get { return _numExamples; } }
 
@@ -1762,19 +1762,19 @@ namespace Microsoft.ML.Trainers.FastTree
         // REVIEW: Our data conversion is extremely inefficient. Fix it!
         private sealed class MemImpl : DataConverter
         {
-            private readonly RoleMappedData _data;
+            private RoleMappedData _data;
 
             // instanceList[feature] is the vector of values for the given feature
-            private readonly ValuesList[] _instanceList;
+            private ValuesList[] _instanceList;
 
-            private readonly List<short> _targetsList;
-            private readonly List<double> _actualTargets;
-            private readonly List<double> _weights;
-            private readonly List<int> _boundaries;
-            private readonly long _numMissingInstances;
-            private readonly int _numExamples;
-            private readonly bool _noFlocks;
-            private readonly int _minDocsPerLeaf;
+            private List<short> _targetsList;
+            private List<double> _actualTargets;
+            private List<double> _weights;
+            private List<int> _boundaries;
+            private long _numMissingInstances;
+            private int _numExamples;
+            private bool _noFlocks;
+            private int _minDocsPerLeaf;
 
             public override int NumExamples
             {
@@ -2640,13 +2640,13 @@ namespace Microsoft.ML.Trainers.FastTree
             public sealed class ForwardIndexer
             {
                 // All of the _values list. We are only addressing _min through _lim.
-                private readonly ValuesList[] _values;
+                private ValuesList[] _values;
                 // Parallel to the subsequence of _values in min to lim, indicates the index where
                 // we should start to look for the next value, if the corresponding value list in
                 // _values is sparse. If the corresponding value list is dense the entry at this
                 // position is not used.
-                private readonly int[] _perFeaturePosition;
-                private readonly int[] _featureIndices;
+                private int[] _perFeaturePosition;
+                private int[] _featureIndices;
 #if DEBUG
                 // Holds for each feature the row index that it was previously accessed on.
                 // Purely for validation purposes.
@@ -2737,12 +2737,12 @@ namespace Microsoft.ML.Trainers.FastTree
 
     internal sealed class ExamplesToFastTreeBins
     {
-        private readonly int _maxBins;
-        private readonly Float _maxLabel;
-        private readonly IHost _host;
-        private readonly bool _diskTranspose;
-        private readonly bool _noFlocks;
-        private readonly int _minDocsPerLeaf;
+        private int _maxBins;
+        private Float _maxLabel;
+        private IHost _host;
+        private bool _diskTranspose;
+        private bool _noFlocks;
+        private int _minDocsPerLeaf;
 
         /// <summary> Bin boundaries </summary>
         public double[][] BinUpperBounds
@@ -2816,14 +2816,14 @@ namespace Microsoft.ML.Trainers.FastTree
         int ITreeEnsemble.NumTrees => TrainedEnsemble.NumTrees;
 
         // Inner args is used only for documentation purposes when saving comments to INI files.
-        protected readonly string InnerArgs;
+        protected string InnerArgs;
 
         // The total number of features used in training (takes the value of zero if the
         // written version of the loaded model is less than VerNumFeaturesSerialized)
-        protected readonly int NumFeatures;
+        protected int NumFeatures;
 
         // Maximum index of the split features of trainedEnsemble trees
-        protected readonly int MaxSplitFeatIdx;
+        protected int MaxSplitFeatIdx;
 
         protected abstract uint VerNumFeaturesSerialized { get; }
 
@@ -2831,10 +2831,10 @@ namespace Microsoft.ML.Trainers.FastTree
 
         protected abstract uint VerCategoricalSplitSerialized { get; }
 
-        protected internal readonly DataViewType InputType;
+        protected internal DataViewType InputType;
         DataViewType IValueMapper.InputType => InputType;
 
-        protected readonly DataViewType OutputType;
+        protected DataViewType OutputType;
         DataViewType IValueMapper.OutputType => OutputType;
 
         bool ICanSavePfa.CanSavePfa => true;
@@ -3303,7 +3303,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class Tree : ITree<VBuffer<Float>>
         {
-            private readonly InternalRegressionTree _regTree;
+            private InternalRegressionTree _regTree;
 
             public Tree(InternalRegressionTree regTree)
             {

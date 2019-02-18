@@ -13,8 +13,8 @@ namespace Microsoft.ML.Trainers.FastTree
     {
         // This should be exposed to outside classes as constants
         public static double[] LabelMap = new double[] { 0.0, 3.0, 7.0, 15.0, 31.0 };
-        public static readonly double[] DiscountMap;
-        private readonly int[] _oneTwoThree;
+        public static double[] DiscountMap;
+        private int[] _oneTwoThree;
 
         // reusable memory
         private int[][] _permutationBuffers;

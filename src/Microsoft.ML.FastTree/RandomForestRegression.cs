@@ -31,7 +31,7 @@ namespace Microsoft.ML.Trainers.FastTree
         IQuantileValueMapper,
         IQuantileRegressionPredictor
     {
-        private readonly int _quantileSampleCount;
+        private int _quantileSampleCount;
 
         internal const string LoaderSignature = "FastForestRegressionExec";
         internal const string RegistrationName = "FastForestRegressionPredictor";
@@ -241,7 +241,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private abstract class ObjectiveFunctionImplBase : RandomForestObjectiveFunction
         {
-            private readonly float[] _labels;
+            private float[] _labels;
 
             public static ObjectiveFunctionImplBase Create(Dataset trainData, Options options)
             {
@@ -267,8 +267,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
             private sealed class ShuffleImpl : ObjectiveFunctionImplBase
             {
-                private readonly Random _rgen;
-                private readonly int _labelLim;
+                private Random _rgen;
+                private int _labelLim;
 
                 public ShuffleImpl(Dataset trainData, Options options)
                     : base(trainData, options)

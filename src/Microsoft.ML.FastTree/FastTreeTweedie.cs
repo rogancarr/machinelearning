@@ -334,10 +334,10 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class ObjectiveImpl : ObjectiveFunctionBase, IStepSearch
         {
-            private readonly float[] _labels;
-            private readonly Double _index1; // 1 minus the index parameter.
-            private readonly Double _index2; // 2 minus the index parameter.
-            private readonly Double _maxClamp;
+            private float[] _labels;
+            private Double _index1; // 1 minus the index parameter.
+            private Double _index2; // 2 minus the index parameter.
+            private Double _maxClamp;
 
             public ObjectiveImpl(Dataset trainData, Options options)
                 : base(

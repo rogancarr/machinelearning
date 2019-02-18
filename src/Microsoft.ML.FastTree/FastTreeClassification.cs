@@ -296,12 +296,12 @@ namespace Microsoft.ML.Trainers.FastTree
 
         internal sealed class ObjectiveImpl : ObjectiveFunctionBase, IStepSearch
         {
-            private readonly bool[] _labels;
-            private readonly bool _unbalancedSets; //Should we use balanced or unbalanced loss function
-            private readonly long _npos;
-            private readonly long _nneg;
+            private bool[] _labels;
+            private bool _unbalancedSets; //Should we use balanced or unbalanced loss function
+            private long _npos;
+            private long _nneg;
             private IParallelTraining _parallelTraining;
-            private readonly double _sigmoidParameter; // Parameter for scaling the loss
+            private double _sigmoidParameter; // Parameter for scaling the loss
 
             public ObjectiveImpl(
                 Dataset trainSet,

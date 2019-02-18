@@ -232,7 +232,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class ObjectiveFunctionImpl : RandomForestObjectiveFunction
         {
-            private readonly bool[] _labels;
+            private bool[] _labels;
 
             public ObjectiveFunctionImpl(Dataset trainSet, bool[] trainSetLabels, Options options)
                 : base(trainSet, options, options.MaxTreeOutput)

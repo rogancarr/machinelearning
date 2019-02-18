@@ -110,9 +110,9 @@ namespace Microsoft.ML.Trainers.FastTree
         private const string RegisterName = "GamTraining";
 
         //Parameters of training
-        protected readonly TArgs Args;
-        private readonly double _gainConfidenceInSquaredStandardDeviations;
-        private readonly double _entropyCoefficient;
+        protected TArgs Args;
+        private double _gainConfidenceInSquaredStandardDeviations;
+        private double _entropyCoefficient;
 
         //Dataset information
         protected Dataset TrainSet;

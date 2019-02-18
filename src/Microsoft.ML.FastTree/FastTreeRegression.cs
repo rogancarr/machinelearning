@@ -386,7 +386,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         internal sealed class ObjectiveImpl : ObjectiveFunctionBase, IStepSearch
         {
-            private readonly float[] _labels;
+            private float[] _labels;
 
             public ObjectiveImpl(Dataset trainData, RegressionGamTrainer.Options options) :
                 base(

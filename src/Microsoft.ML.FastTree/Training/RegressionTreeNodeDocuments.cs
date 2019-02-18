@@ -15,9 +15,9 @@ namespace Microsoft.ML.Trainers.FastTree
     // The caller can treat interior node (entire subtree) in a same fashion as a leaf node.
     public class RegressionTreeNodeDocuments
     {
-        internal readonly InternalRegressionTree Tree;
-        public readonly DocumentPartitioning Partitioning;
-        public readonly int NodeIndex; //Index to a node or leaf within the tree
+        internal InternalRegressionTree Tree;
+        public DocumentPartitioning Partitioning;
+        public int NodeIndex; //Index to a node or leaf within the tree
         private int _documentCount;
         public bool IsLeaf => NodeIndex < 0;
 
@@ -88,8 +88,8 @@ namespace Microsoft.ML.Trainers.FastTree
     public class RecursiveRegressionTree : RegressionTreeNodeDocuments
     {
         //Left and right children on a regression tree
-        public readonly RecursiveRegressionTree LteNode;
-        public readonly RecursiveRegressionTree GtNode;
+        public RecursiveRegressionTree LteNode;
+        public RecursiveRegressionTree GtNode;
         private double _weightedOutput;
         private int _nodeCount;
 

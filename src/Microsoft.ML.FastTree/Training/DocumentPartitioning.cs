@@ -17,9 +17,9 @@ namespace Microsoft.ML.Trainers.FastTree
 
     public sealed class DocumentPartitioning
     {
-        private readonly int[] _leafBegin;
-        private readonly int[] _leafCount;
-        private readonly int[] _documents;
+        private int[] _leafBegin;
+        private int[] _leafCount;
+        private int[] _documents;
         private int[] _tempDocuments;
         private int[] _initialDocuments;
 

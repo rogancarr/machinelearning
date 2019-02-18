@@ -43,7 +43,7 @@ namespace Microsoft.ML.Trainers.FastTree
         internal const string LoadNameValue = "BinaryClassificationGamTrainer";
         internal const string UserNameValue = "Generalized Additive Model for Binary Classification";
         internal const string ShortName = "gam";
-        private readonly double _sigmoidParameter;
+        private double _sigmoidParameter;
 
         public override PredictionKind PredictionKind => PredictionKind.BinaryClassification;
         private protected override bool NeedCalibration => true;

@@ -28,9 +28,9 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     internal sealed class DeltaSparseIntArray : IntArray
     {
-        private readonly DenseIntArray _values;
-        private readonly byte[] _deltas;
-        private readonly int _length;
+        private DenseIntArray _values;
+        private byte[] _deltas;
+        private int _length;
 
         public DeltaSparseIntArray(int length, IntArrayBits bitsPerItem)
         {
@@ -527,7 +527,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private class DeltaSparseIntArrayIndexer : IIntArrayForwardIndexer
         {
-            private readonly DeltaSparseIntArray _array;
+            private DeltaSparseIntArray _array;
             private int _pos;
             private int _nextIndex; // Next non-zero index.
 

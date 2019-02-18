@@ -9,7 +9,7 @@ namespace Microsoft.ML.Trainers.FastTree
         where TModel : class
         where TTransformer: ISingleFeaturePredictionTransformer<TModel>
     {
-        private readonly bool _quantileEnabled;
+        private bool _quantileEnabled;
 
         /// <summary>
         /// Constructor invoked by the maml code-path.
