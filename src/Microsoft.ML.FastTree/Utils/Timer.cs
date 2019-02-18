@@ -120,11 +120,11 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class TimerState
         {
-            public readonly Stopwatch Watch;
-            public readonly long[] TickTotals;
-            public readonly int[] NumCalls;
-            public readonly int MaxEventNameLen;
-            public readonly long[] CountTotals;
+            public Stopwatch Watch;
+            public long[] TickTotals;
+            public int[] NumCalls;
+            public int MaxEventNameLen;
+            public long[] CountTotals;
 
             public TimerState()
             {
@@ -224,8 +224,8 @@ namespace Microsoft.ML.Trainers.FastTree
         /// </summary>
         public sealed class TimedEvent : IDisposable
         {
-            private readonly long _ticksBegin;
-            private readonly TimerEvent _event;
+            private long _ticksBegin;
+            private TimerEvent _event;
 
             public TimedEvent(long ticks, TimerEvent evt)
             {

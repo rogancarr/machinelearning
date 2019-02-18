@@ -69,8 +69,8 @@ namespace Microsoft.ML.Data
             /// </summary>
             private const int PathIdsColumnId = 2;
 
-            private readonly TreeEnsembleFeaturizerBindableMapper _owner;
-            private readonly IExceptionContext _ectx;
+            private TreeEnsembleFeaturizerBindableMapper _owner;
+            private IExceptionContext _ectx;
 
             public RoleMappedSchema InputRoleMappedSchema { get; }
 
@@ -192,18 +192,18 @@ namespace Microsoft.ML.Data
 
             private sealed class State
             {
-                private readonly IExceptionContext _ectx;
-                private readonly DataViewRow _input;
-                private readonly TreeEnsembleModelParameters _ensemble;
-                private readonly int _numTrees;
-                private readonly int _numLeaves;
+                private IExceptionContext _ectx;
+                private DataViewRow _input;
+                private TreeEnsembleModelParameters _ensemble;
+                private int _numTrees;
+                private int _numLeaves;
 
                 private VBuffer<float> _src;
                 private ValueGetter<VBuffer<float>> _featureGetter;
 
                 private long _cachedPosition;
-                private readonly int[] _leafIds;
-                private readonly List<int>[] _pathIds;
+                private int[] _leafIds;
+                private List<int>[] _pathIds;
 
                 private BufferBuilder<float> _leafIdBuilder;
                 private BufferBuilder<float> _pathIdBuilder;
@@ -355,9 +355,9 @@ namespace Microsoft.ML.Data
                 loaderAssemblyName: typeof(TreeEnsembleFeaturizerBindableMapper).Assembly.FullName);
         }
 
-        private readonly IHost _host;
-        private readonly TreeEnsembleModelParameters _ensemble;
-        private readonly int _totalLeafCount;
+        private IHost _host;
+        private TreeEnsembleModelParameters _ensemble;
+        private int _totalLeafCount;
 
         public TreeEnsembleFeaturizerBindableMapper(IHostEnvironment env, Arguments args, IPredictor predictor)
         {

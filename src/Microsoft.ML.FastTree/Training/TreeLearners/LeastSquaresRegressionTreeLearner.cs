@@ -23,19 +23,19 @@ namespace Microsoft.ML.Trainers.FastTree
     internal class LeastSquaresRegressionTreeLearner : TreeLearner, ILeafSplitStatisticsCalculator
     {
         // parameters
-        protected readonly int MinDocsInLeaf;
-        protected readonly int MinDocsInLeafGlobal;
-        protected readonly bool AllowEmptyTrees;
+        protected int MinDocsInLeaf;
+        protected int MinDocsInLeafGlobal;
+        protected bool AllowEmptyTrees;
 
-        protected readonly double EntropyCoefficient;
-        protected readonly double FeatureFirstUsePenalty;
-        protected readonly double FeatureReusePenalty;
-        protected readonly double SoftmaxTemperature;
-        protected readonly double GainConfidenceInSquaredStandardDeviations;
-        public readonly double MinDocsPercentageForCategoricalSplit;
-        public readonly int MinDocsForCategoricalSplit;
-        public readonly Bundle Bundling;
-        public readonly double Bias;
+        protected double EntropyCoefficient;
+        protected double FeatureFirstUsePenalty;
+        protected double FeatureReusePenalty;
+        protected double SoftmaxTemperature;
+        protected double GainConfidenceInSquaredStandardDeviations;
+        public double MinDocsPercentageForCategoricalSplit;
+        public int MinDocsForCategoricalSplit;
+        public Bundle Bundling;
+        public double Bias;
 
         // Multithread task to find best threshold.
         private IThreadTask _calculateLeafSplitCandidates;
@@ -47,11 +47,11 @@ namespace Microsoft.ML.Trainers.FastTree
         // feature/threshold for a certain leaf. This data structure is allocated once, and reused again and again,
         // to prevent repeated reallocation and garbage-collection. We keep two of these around, since we
         // typically search for the best feature/threshold for two leaves in parallel
-        protected readonly LeafSplitCandidates SmallerChildSplitCandidates;
-        protected readonly LeafSplitCandidates LargerChildSplitCandidates;
+        protected LeafSplitCandidates SmallerChildSplitCandidates;
+        protected LeafSplitCandidates LargerChildSplitCandidates;
 
         // histogram arrays, used to cache histograms for future use
-        protected readonly MappedObjectPool<SufficientStatsBase[]> HistogramArrayPool;
+        protected MappedObjectPool<SufficientStatsBase[]> HistogramArrayPool;
         protected SufficientStatsBase[] ParentHistogramArray;
         protected SufficientStatsBase[] SmallerChildHistogramArray;
         protected SufficientStatsBase[] LargerChildHistogramArray;
@@ -60,16 +60,16 @@ namespace Microsoft.ML.Trainers.FastTree
         protected bool[] ActiveFeatures;
 
         // how many times each feature has been split on, for diversity penalty
-        protected readonly int[] FeatureUseCount;
+        protected int[] FeatureUseCount;
 
-        protected readonly Random Rand;
+        protected Random Rand;
 
-        protected readonly double SplitFraction;
-        protected readonly bool FilterZeros;
-        protected readonly double BsrMaxTreeOutput;
+        protected double SplitFraction;
+        protected bool FilterZeros;
+        protected double BsrMaxTreeOutput;
 
         // size of reserved memory
-        private readonly long _sizeOfReservedMemory;
+        private long _sizeOfReservedMemory;
 
         private IParallelTraining _parallelTraining;
 
@@ -820,13 +820,13 @@ namespace Microsoft.ML.Trainers.FastTree
             private double _sumSquaredTargets;
             private int[] _docIndices;
             private int[] _docIndicesCopy;
-            public readonly FloatType[] Targets;
-            public readonly double[] Weights;
-            public readonly SplitInfo[] FeatureSplitInfo;
+            public FloatType[] Targets;
+            public double[] Weights;
+            public SplitInfo[] FeatureSplitInfo;
             // Note that the range of this map is the feature index for the dataset, not
             // the feature index within the corresponding flock. -1 if there is no applicable
             // best feature found for this flock.
-            public readonly int[] FlockToBestFeature;
+            public int[] FlockToBestFeature;
 
             public LeafSplitCandidates(Dataset data)
             {

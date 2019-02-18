@@ -32,8 +32,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private class ThreadTask : IThreadTask
         {
-            private readonly int _num;
-            private readonly Action[] _actions;
+            private int _num;
+            private Action[] _actions;
 
             public ThreadTask(int num, IEnumerable<Action> actions)
             {

@@ -12,12 +12,12 @@ namespace Microsoft.ML.Trainers.FastTree
 {
     public sealed class WinLossCalculator
     {
-        private readonly int[] _oneTwoThree;
+        private int[] _oneTwoThree;
 
         // reusable memory
-        private readonly int[][] _permutationBuffers;
-        private readonly double[][] _scoreBuffers;
-        private readonly DcgPermutationComparer[] _comparers;
+        private int[][] _permutationBuffers;
+        private double[][] _scoreBuffers;
+        private DcgPermutationComparer[] _comparers;
 
         /// <summary>
         /// Constructs a WinLoss calculator

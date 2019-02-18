@@ -15,8 +15,8 @@ namespace Microsoft.ML.Trainers.FastTree
 {
     public sealed class TreeEnsembleCombiner : IModelCombiner
     {
-        private readonly IHost _host;
-        private readonly PredictionKind _kind;
+        private IHost _host;
+        private PredictionKind _kind;
 
         public TreeEnsembleCombiner(IHostEnvironment env, PredictionKind kind)
         {

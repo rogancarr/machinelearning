@@ -14,8 +14,8 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     public sealed class PseudorandomFunction
     {
-        private readonly int[][] _data;
-        private static readonly int[] _periodics = new int[] { 32, 27, 25, 49, 11, 13, 17, 23, 29, 31, 37, 41, 43, 47 };
+        private int[][] _data;
+        private static int[] _periodics = new int[] { 32, 27, 25, 49, 11, 13, 17, 23, 29, 31, 37, 41, 43, 47 };
 
         public PseudorandomFunction(Random rand)
         {

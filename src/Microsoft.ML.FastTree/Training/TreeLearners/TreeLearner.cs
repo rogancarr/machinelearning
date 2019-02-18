@@ -8,8 +8,8 @@ namespace Microsoft.ML.Trainers.FastTree
 {
     internal abstract class TreeLearner
     {
-        public readonly Dataset TrainData;
-        public readonly int NumLeaves;
+        public Dataset TrainData;
+        public int NumLeaves;
         // REVIEW: Needs to be assignable due to the way bagging is implemented. :P Imagine something less stupid and fragile.
         public DocumentPartitioning Partitioning;
 

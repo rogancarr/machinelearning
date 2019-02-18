@@ -22,8 +22,8 @@ namespace Microsoft.ML.Trainers.FastTree
         /// <summary>
         /// String appended to the text representation of <see cref="InternalTreeEnsemble"/>. This is mainly used in <see cref="ToTreeEnsembleIni"/>.
         /// </summary>
-        private readonly string _firstInputInitializationContent;
-        private readonly List<InternalRegressionTree> _trees;
+        private string _firstInputInitializationContent;
+        private List<InternalRegressionTree> _trees;
 
         public IEnumerable<InternalRegressionTree> Trees => _trees;
 
@@ -420,8 +420,8 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     internal sealed class FeaturesToContentMap
     {
-        private readonly VBuffer<ReadOnlyMemory<char>> _content;
-        private readonly VBuffer<ReadOnlyMemory<char>> _names;
+        private VBuffer<ReadOnlyMemory<char>> _content;
+        private VBuffer<ReadOnlyMemory<char>> _names;
 
         public int Count => _names.Length;
 

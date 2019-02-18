@@ -14,7 +14,7 @@ namespace Microsoft.ML.Trainers.FastTree
         /// </summary>
         private sealed class UndisposableStream : Stream
         {
-            private readonly Stream _inner;
+            private Stream _inner;
 
             public override bool CanRead => _inner.CanRead;
             public override bool CanSeek => _inner.CanSeek;

@@ -195,8 +195,8 @@ namespace Microsoft.ML.Trainers.FastTree
     // Each itaratin captures an array of LossFunctions computed by inderlying Test
     public class TestHistory : Test
     {
-        public readonly Test SimpleTest;
-        public readonly int LossIndex;
+        public Test SimpleTest;
+        public int LossIndex;
         protected IList<TestResult[]> History;
         protected int Iteration { get; private set; }
 
@@ -269,8 +269,8 @@ namespace Microsoft.ML.Trainers.FastTree
             }
         }
 
-        private readonly int _windowSize;
-        private readonly double _tolerance;
+        private int _windowSize;
+        private double _tolerance;
         // Queue for moving window
         private LinkedList<double> _window;
 
@@ -336,9 +336,9 @@ namespace Microsoft.ML.Trainers.FastTree
 
     public class NdcgTest : Test
     {
-        protected readonly DcgCalculator DcgCalculator;
-        private readonly string _sortingAlgorithm;
-        protected readonly short[] Labels;
+        protected DcgCalculator DcgCalculator;
+        private string _sortingAlgorithm;
+        protected short[] Labels;
 
         internal NdcgTest(ScoreTracker scoreTracker, short[] labels, string sortingAlgorithm)
             : base(scoreTracker)
@@ -379,7 +379,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
     public class FastNdcgTest : NdcgTest
     {
-        protected readonly int NdcgTruncation;
+        protected int NdcgTruncation;
 
         public FastNdcgTest(ScoreTracker scoreTracker, short[] labels, string sortingAlgorithm, int ndcgTruncation)
             : base(scoreTracker, labels, sortingAlgorithm)
@@ -416,8 +416,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
     internal sealed class FastNdcgTestForTrainSet : FastNdcgTest
     {
-        private readonly ScoreTracker _trainingScores;
-        private readonly FastTreeRankingTrainer.LambdaRankObjectiveFunction _rankingObjectiveFunction;
+        private ScoreTracker _trainingScores;
+        private FastTreeRankingTrainer.LambdaRankObjectiveFunction _rankingObjectiveFunction;
 
         public FastNdcgTestForTrainSet(ScoreTracker trainingScores, FastTreeRankingTrainer.LambdaRankObjectiveFunction rankingObjectiveFunction, short[] labels, string sortingAlgorithm, int ndcgTruncation)
             : base(trainingScores, labels, sortingAlgorithm, ndcgTruncation)
@@ -459,11 +459,11 @@ namespace Microsoft.ML.Trainers.FastTree
 
     public sealed class WinLossSurplusTest : Test
     {
-        private readonly Lazy<WinLossCalculator> _winLossCalculator;
+        private Lazy<WinLossCalculator> _winLossCalculator;
 
-        private readonly double _scaleFactor;
-        private readonly string _sortingAlgorithm;
-        private readonly short[] _labels;
+        private double _scaleFactor;
+        private string _sortingAlgorithm;
+        private short[] _labels;
 
         public WinLossSurplusTest(ScoreTracker scoreTracker, short[] labels, string sortingAlgorithm, double scaleFactor)
             : base(scoreTracker)
@@ -515,8 +515,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
     public sealed class RegressionTest : Test
     {
-        private readonly float[] _labels;
-        private readonly int? _resultType;
+        private float[] _labels;
+        private int? _resultType;
 
         ///<param name="scoreTracker"></param>
         /// <param name="resultType">1: L1, 2: L2. Otherwise, return all.</param>
@@ -587,10 +587,10 @@ namespace Microsoft.ML.Trainers.FastTree
 
     public sealed class BinaryClassificationTest : Test
     {
-        private readonly bool[] _binaryLabels;
-        private readonly double _recipNpos;
-        private readonly double _recipNneg;
-        private readonly double _sigmoidParameter;
+        private bool[] _binaryLabels;
+        private double _recipNpos;
+        private double _recipNneg;
+        private double _sigmoidParameter;
 
         public BinaryClassificationTest(ScoreTracker scoreTracker, bool[] binaryLabels, double sigmoidParameter)
             : base(scoreTracker)
