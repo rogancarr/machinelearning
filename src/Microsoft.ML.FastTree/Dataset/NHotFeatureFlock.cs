@@ -15,8 +15,8 @@ namespace Microsoft.ML.Trainers.FastTree
         // checks or enforces that the deltas are non-zero.
 
         // These are the same as the internal structures to the delta sparse int array.
-        private readonly DenseIntArray _values;
-        private readonly byte[] _deltas;
+        private DenseIntArray _values;
+        private byte[] _deltas;
 
         public NHotFeatureFlock(DenseIntArray values, byte[] deltas, int len,
             int[] hotFeatureStarts, double[][] binUpperBounds)
@@ -40,7 +40,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class FlockIndexer : FlockForwardIndexerBase
         {
-            private readonly NHotFeatureFlock _flock;
+            private NHotFeatureFlock _flock;
             private int _pos;
             private int _nextIndex; // Next non-zero index.
 

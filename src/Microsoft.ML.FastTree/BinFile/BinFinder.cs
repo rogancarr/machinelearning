@@ -14,7 +14,7 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     internal sealed class BinFinder
     {
-        private readonly GreedyBinFinder _finder;
+        private GreedyBinFinder _finder;
         private double[] _distinctValues;
         private double[] _distinctCountsBuffer;
         private int[] _counts;

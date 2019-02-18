@@ -13,8 +13,8 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     internal sealed class SingletonFeatureFlock : FeatureFlockBase
     {
-        private readonly IntArray _bins;
-        private readonly double[] _binUpperBounds;
+        private IntArray _bins;
+        private double[] _binUpperBounds;
 
         public override int Examples => _bins.Length;
 
@@ -76,8 +76,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class Indexer : FlockForwardIndexerBase
         {
-            private readonly SingletonFeatureFlock _flock;
-            private readonly IIntArrayForwardIndexer _indexer;
+            private SingletonFeatureFlock _flock;
+            private IIntArrayForwardIndexer _indexer;
 
             public override FeatureFlockBase Flock { get { return _flock; } }
 
@@ -100,8 +100,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class SufficientStats : SufficientStatsBase<SufficientStats>
         {
-            private readonly SingletonFeatureFlock _flock;
-            private readonly FeatureHistogram _hist;
+            private SingletonFeatureFlock _flock;
+            private FeatureHistogram _hist;
 
             public override FeatureFlockBase Flock
             {

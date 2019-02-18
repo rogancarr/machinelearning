@@ -18,13 +18,13 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     public sealed class FeatureHistogram
     {
-        public readonly FloatType[] SumTargetsByBin;
-        public readonly double[] SumWeightsByBin;
-        public readonly int[] CountByBin;
+        public FloatType[] SumTargetsByBin;
+        public double[] SumWeightsByBin;
+        public int[] CountByBin;
 
-        public readonly int NumFeatureValues;
+        public int NumFeatureValues;
 
-        private readonly IntArray _bins;
+        private IntArray _bins;
 
         /// <summary>
         /// Make a new FeatureHistogram
@@ -142,10 +142,10 @@ namespace Microsoft.ML.Trainers.FastTree
     {
         public int TotalCount;
         public double SumTargets;
-        public readonly FloatType[] Outputs;
-        public readonly int[] DocIndices;
+        public FloatType[] Outputs;
+        public int[] DocIndices;
         public double SumWeights;
-        public readonly double[] Weights;
+        public double[] Weights;
 
         public SumupInputData(int totalCount, double sumTargets, double sumWeights,
             FloatType[] outputs, double[] weights, int[] docIndices)

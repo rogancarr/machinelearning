@@ -109,8 +109,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private IntPtr InputExtractorPtr { get; set; }
         private IntPtr FeatureMapPtr { get; set; }
-        private readonly FeatureMap _featureMap;
-        private readonly FeatureEvaluator[] _evaluators;
+        private FeatureMap _featureMap;
+        private FeatureEvaluator[] _evaluators;
 
         /// <summary>
         /// Gets the map between feature names and indices
@@ -249,8 +249,8 @@ namespace Microsoft.ML.Trainers.FastTree
         /// </summary>
         public sealed class FeatureEvaluator
         {
-            private readonly IniFileParserInterface _parserInterface;
-            private readonly IntPtr _inputPtr;
+            private IniFileParserInterface _parserInterface;
+            private IntPtr _inputPtr;
 
             public int Id { get; }
 

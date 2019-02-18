@@ -41,9 +41,9 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class Indexer : IIntArrayForwardIndexer
         {
-            private readonly IIntArrayForwardIndexer _indexer;
-            private readonly int _minMinusOne;
-            private readonly int _lim;
+            private IIntArrayForwardIndexer _indexer;
+            private int _minMinusOne;
+            private int _lim;
 
             public int this[int index]
             {
@@ -78,8 +78,8 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private sealed class FlockIndexer : FlockForwardIndexerBase
         {
-            private readonly OneHotFeatureFlock _flock;
-            private readonly IIntArrayForwardIndexer _indexer;
+            private OneHotFeatureFlock _flock;
+            private IIntArrayForwardIndexer _indexer;
 
             public override FeatureFlockBase Flock { get { return _flock; } }
 

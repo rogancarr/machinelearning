@@ -192,7 +192,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
     public sealed class TsvFeature : Feature
     {
-        private readonly uint[] _valueMap;
+        private uint[] _valueMap;
         private string _name;
 
         /// <summary>

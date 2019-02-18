@@ -15,13 +15,13 @@ namespace Microsoft.ML.Trainers.FastTree
     /// </summary>
     public sealed class Dataset
     {
-        private readonly DatasetSkeleton _datasetSkeleton;
-        private readonly FeatureFlockBase[] _flocks;
+        private DatasetSkeleton _datasetSkeleton;
+        private FeatureFlockBase[] _flocks;
         // Maps index of the flock, to index of the first feature of that flock.
-        private readonly int[] _flockToFirstFeature;
+        private int[] _flockToFirstFeature;
         // Maps index of a feature, to the flock containing that feature. In combination with
         // _flockToFirstFeature can easily recover the feature sub-index within the flock itself.
-        private readonly int[] _featureToFlock;
+        private int[] _featureToFlock;
 
         public UInt32[] DupeIds { get; private set; }
 
@@ -420,9 +420,9 @@ namespace Microsoft.ML.Trainers.FastTree
         public sealed class DatasetSkeleton
         {
             private short[] _ratings;
-            public readonly int[] Boundaries;
-            public readonly ulong[] QueryIds;
-            public readonly ulong[] DocIds;
+            public int[] Boundaries;
+            public ulong[] QueryIds;
+            public ulong[] DocIds;
             public double[][] MaxDcg;
             private int[] _docToQuery;
 
@@ -728,7 +728,7 @@ namespace Microsoft.ML.Trainers.FastTree
             }
 
             private static double[] _labelMap = new double[] { 0.0, 3.0, 7.0, 15.0, 31.0 };
-            private static readonly double[] _discountMap = new double[] { 1.44269504, 0.91023922, 0.72134752, 0.62133493, 0.55811062, 0.51389834, 0.48089834, 0.45511961, 0.43429448, 0.41703239, 0.40242960 };
+            private static double[] _discountMap = new double[] { 1.44269504, 0.91023922, 0.72134752, 0.62133493, 0.55811062, 0.51389834, 0.48089834, 0.45511961, 0.43429448, 0.41703239, 0.40242960 };
 
             public static double[] LabelGainMap
             {
@@ -912,13 +912,13 @@ namespace Microsoft.ML.Trainers.FastTree
         /// </summary>
         public sealed class RowForwardIndexer
         {
-            private readonly Dataset _dataset;
-            private readonly FeatureFlockBase.FlockForwardIndexerBase[] _flockIndexers;
+            private Dataset _dataset;
+            private FeatureFlockBase.FlockForwardIndexerBase[] _flockIndexers;
 
-            public readonly struct Row
+            public struct Row
             {
-                private readonly RowForwardIndexer _indexer;
-                private readonly int _rowIndex;
+                private RowForwardIndexer _indexer;
+                private int _rowIndex;
 
                 /// <summary>
                 /// Indexes the value of a feature for this row.

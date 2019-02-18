@@ -23,14 +23,14 @@ namespace Microsoft.ML.Trainers.FastTree
     /// are then used in <see cref="LeastSquaresRegressionTreeLearner"/> to find splitting on which bin will yield the
     /// best least squares solution
     /// </summary>
-    public readonly struct PerBinStats
+    public struct PerBinStats
     {
         /// <summary>Sum of all target values in a partition for the bin.</summary>
-        public readonly Double SumTargets;
+        public Double SumTargets;
         /// <summary>Sum of all target weights in a partition. May be 0 if we are not doing weighted training.</summary>
-        public readonly Double SumWeights;
+        public Double SumWeights;
         /// <summary>Count of the documents in this partition for the bin.</summary>
-        public readonly int Count;
+        public int Count;
 
         public PerBinStats(Double sumTargets, Double sumWeights, int count)
         {
@@ -60,7 +60,7 @@ namespace Microsoft.ML.Trainers.FastTree
         /// <see cref="LeastSquaresRegressionTreeLearner"/> to indicate whether a particular
         /// feature has been judged to be potentially splittable or not.
         /// </summary>
-        public readonly bool[] IsSplittable;
+        public bool[] IsSplittable;
 
 #if DEBUG
         /// <summary>
@@ -68,7 +68,7 @@ namespace Microsoft.ML.Trainers.FastTree
         /// was marked as "active" or not. Used in debug builds only, to track the invariants w.r.t.
         /// calls of <see cref="Sumup"/> and <see cref="Subtract"/>.
         /// </summary>
-        private readonly bool[] _active;
+        private bool[] _active;
 #endif
 
         public abstract FeatureFlockBase Flock { get; }
@@ -972,7 +972,7 @@ namespace Microsoft.ML.Trainers.FastTree
         /// <summary>
         /// The number of features contained within this flock.
         /// </summary>
-        public readonly int Count;
+        public int Count;
 
         /// <summary>
         /// The number of training examples represented by the features within this flock.
@@ -1056,8 +1056,8 @@ namespace Microsoft.ML.Trainers.FastTree
         /// </summary>
         private sealed class GenericIntArrayForwardIndexer : IIntArrayForwardIndexer
         {
-            private readonly FlockForwardIndexerBase _flockIndexer;
-            private readonly int _feature;
+            private FlockForwardIndexerBase _flockIndexer;
+            private int _feature;
 
             public GenericIntArrayForwardIndexer(FlockForwardIndexerBase flockIndexer, int feature)
             {
@@ -1107,9 +1107,9 @@ namespace Microsoft.ML.Trainers.FastTree
     internal abstract class SinglePartitionedIntArrayFlockBase<TIntArray> : FeatureFlockBase
         where TIntArray : IntArray
     {
-        public readonly TIntArray Bins;
-        protected readonly int[] HotFeatureStarts;
-        protected readonly double[][] AllBinUpperBounds;
+        public TIntArray Bins;
+        protected int[] HotFeatureStarts;
+        protected double[][] AllBinUpperBounds;
 
         public override int Examples => Bins.Length;
 
@@ -1219,13 +1219,13 @@ namespace Microsoft.ML.Trainers.FastTree
         /// </summary>
         private sealed class SufficientStats : SufficientStatsBase<SufficientStats>
         {
-            private readonly SinglePartitionedIntArrayFlockBase<TIntArray> _flock;
+            private SinglePartitionedIntArrayFlockBase<TIntArray> _flock;
             /// <summary>
             /// Stores the sufficient statistics for all features within this flock using a single
             /// histogram, where the range of what accumulated sufficient statistics correspond to
             /// what actual logical feature depends on <see cref="HotFeatureStarts"/>.
             /// </summary>
-            public readonly FeatureHistogram Hist;
+            public FeatureHistogram Hist;
 
             public override FeatureFlockBase Flock => _flock;
 

@@ -17,11 +17,11 @@ namespace Microsoft.ML.Trainers.FastTree
 
     internal sealed class SegmentIntArray : IntArray
     {
-        private readonly byte[] _segType;
-        private readonly int[] _segLength;
-        private readonly uint[] _data;
-        private readonly int _length;
-        private readonly IntArrayBits _bpi;
+        private byte[] _segType;
+        private int[] _segLength;
+        private uint[] _data;
+        private int _length;
+        private IntArrayBits _bpi;
 
         /// <summary>
         /// The cost of a transition between segments in bits.
@@ -296,7 +296,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private class SegmentIntArrayIndexer : IIntArrayForwardIndexer
         {
-            private readonly SegmentIntArray _array;
+            private SegmentIntArray _array;
             private int _nextIndex; // index where the next segment begins
 
             private long _currentBit; // the bit offset

@@ -16,10 +16,10 @@ namespace Microsoft.ML.Trainers.FastTree
 
     internal sealed class DeltaRepeatIntArray : IntArray
     {
-        private readonly DenseIntArray _values;
-        private readonly int _length;
+        private DenseIntArray _values;
+        private int _length;
         private byte[] _deltas;
-        private readonly int _deltasActualLength;
+        private int _deltasActualLength;
 
         public DeltaRepeatIntArray(int length, IntArrayBits bitsPerItem, IEnumerable<int> values)
         {
@@ -133,7 +133,7 @@ namespace Microsoft.ML.Trainers.FastTree
 
         private class DeltaRepeatIntArrayIndexer : IIntArrayForwardIndexer
         {
-            private readonly DeltaRepeatIntArray _array;
+            private DeltaRepeatIntArray _array;
             private int _pos;
             private int _nextIndex; // next different index
             private int _lastVal; // The last value.
